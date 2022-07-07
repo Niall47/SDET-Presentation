@@ -34,12 +34,14 @@ class Registration_number
   end
 end
 
-# Take an input, if input is not provided or looks invalid we do nothing but complain
+# If input is not provided or looks invalid we do nothing but complain
 if ARGV.empty? || ARGV.first.chars.count != 7 || !ARGV.first.match?(/[A-Z]{2}\d{2}[A-Z]{3}/)  
   puts "#{ARGV.first} did not look like a registration number"
 else
+  # Otherwise we create print out the reults
   registration_number = Registration_number.new(ARGV.first)
-  puts registration_number.area_code_valid?
-  puts registration_number.valid_age?
-  puts registration_number.random_characters_valid?
+  result = {area_code: registration_number.area_code_valid?,
+          age: registration_number.valid_age?,
+          random_characters: registration_number.random_characters_valid?}.to_json
+  puts result
 end
