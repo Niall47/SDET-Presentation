@@ -14,26 +14,23 @@ class Registration_number
 
   def area_code_valid?
     # Check our registration number matches a region and does not contain invalid characters
-    region_valid? || !invalid_chars?
+    region_valid? || !invalid_chars?(@area_code)
   end
 
   def region_valid?
     @validation_data['region'][@area_code[0]] != nil
   end
 
-  def invalid_chars?
-    # We are checking both values for invalid character. May not be needed per brief
-    @area_code.include?('I') || @area_code.include?('Q')
+  def invalid_chars?(string)
+    string.include?('I') || string.include?('Q')
   end
 
   def valid_age?
-    binding.pry
-    # convert the array of chars to an integer
-    # age = age_identifier.flatten.join.to_i
+    @validation_data['age'][@age_identifier] != nil
   end
 
   def random_characters_valid?
-
+    !invalid_chars?(@random_section)
   end
 end
 
@@ -42,7 +39,7 @@ if ARGV.empty? || ARGV.first.chars.count != 7 || !ARGV.first.match?(/[A-Z]{2}\d{
   puts "#{ARGV.first} did not look like a registration number"
 else
   registration_number = Registration_number.new(ARGV.first)
-  puts registration_number.region_valid? 
-  # puts registration_number.area_code_valid?
-  # puts registration_number.random_characters_valid?
+  puts registration_number.area_code_valid?
+  puts registration_number.valid_age?
+  puts registration_number.random_characters_valid?
 end
