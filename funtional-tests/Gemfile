@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+# gem "rails"
+
+gem 'cucumber', '~> 8.0'
+
+gem 'rake', '~> 13.0'
+
+gem 'chutney', '~> 3.2'
+
+gem 'rubocop', '~> 1.31'
