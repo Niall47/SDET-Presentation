@@ -29,27 +29,23 @@ def valid_age?(age_identifier)
   # convert the array of chars to an integer
   age = age_identifier.flatten.join.to_i
 
-  # First registration was 51 followed by 02, so 01 is impossible and 72 is the current highest valid age
-  return false if age <= 1 || age > 72 
-
-
-  if (age_identifier[0].to_i >= 5)
-    age = (age_identifier[0].to_i - 5).to_s + age_identifier[1].to_s
-    # binding.pry
-    puts "From September 20#{age.to_s} to March 20#{(age.to_i + 1).to_s}"
-  else
-    puts "From March#{age.to_s} to September 20"
-    puts age_integer
-  end
-  true
 end
+
 def valid_random_characters?(characters)
   false
 end
 
+class Registration_number
+  @@no_of_customers = 0
+  def initialize(input)
+    @area_code = input[0..1]
+    @age_identifier = input[2..3]
+    @random_section = input[4..6]
+    @value = input.join
+  end
+end
 
-
-# Take an input, if input is not provided or looks invalid we do nothing
+# Take an input, if input is not provided or looks invalid we do nothing but complain
 if ARGV.empty? || ARGV.first.chars.count != 7 || !correct_format?(ARGV.first)
   puts "#{ARGV.first} did not look like a registration number"
   # binding.pry
@@ -60,10 +56,11 @@ else
   age_identifier = input[2..3]
   random_section = input[4..6]
   registration_number = { area_code: area_code, age_identifier: age_identifier, random_section: random_section }
-  # binding.pry
+  binding.pry
   $validation_data = JSON.parse(File.read('validations.json'))
-  pp $validation_data
-  puts "Area code valid? #{area_code_valid?(registration_number[:area_code])}"
-  puts "Age valid? #{valid_age?(registration_number[:age_identifier])}"
-  puts "Random characters valid? #{valid_random_characters?(registration_number[:random_section])}"
+
+  # pp $validation_data
+  # puts "Area code valid? #{area_code_valid?(registration_number[:area_code])}"
+  # puts "Age valid? #{valid_age?(registration_number[:age_identifier])}"
+  # puts "Random characters valid? #{valid_random_characters?(registration_number[:random_section])}"
 end
