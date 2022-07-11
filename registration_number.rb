@@ -15,7 +15,7 @@ class Registration_number
   def format_valid?
     # determine if it is in the correct format for a vehicle registration value (two letters, two numbers, three more letters).
     if @value.match?(/[A-Z]{2}\d{2}[A-Z]{3}/)
-      'Matched current style format'
+      "#{@value} matches current style format"
     else
       raise 'invalid format'
     end
@@ -56,6 +56,4 @@ class Registration_number
     # Check if the first character matches a value from our list of valid ones
     @validation_data['age'][@age_identifier] != nil
   end
-
-
 end

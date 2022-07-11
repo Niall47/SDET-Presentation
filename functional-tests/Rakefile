@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+require 'chutney'
+require 'chutney/formatter'
+require 'chutney/formatter/rainbow_formatter'
+
+task default: ['test:unit']
+
+namespace :test do
+  desc 'chutney'
+  task :chutney do
+    files = Dir.glob('features/**/*.feature')
+    linter = Chutney::ChutneyLint.new(*files)
+    report = linter.analyse
+    formatter = Chutney::RainbowFormatter.new
+    formatter.results = report
+    formatter.format
+
+    exit(false) unless formatter.files_with_issues.empty?
+  end
+
+  desc 'run linters'
+  task lint: :chutney do
+    sh 'rubocop || true'
+  end
+  desc 'run tests'
+  task :local do
+    puts 'hellowoerd'
+  end
+end

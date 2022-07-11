@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'pry'
 
-def validate(input)
+def validate(_input)
   response = `cd .. && ruby run.rb -info \' + input`
   p response
   # system('cd .. && ruby run.rb -info ' + input)
