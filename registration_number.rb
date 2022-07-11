@@ -24,7 +24,7 @@ class Registration_number
   def year_of_registration
     # display the year of registration it represents if the age identifier is valid or an error if it is invalid
     year = @validation_data['age'][@age_identifier]
-    if year
+    if year && format_valid?
       year
     else
       raise "Unable to get age for #{value}"

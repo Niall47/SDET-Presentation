@@ -4,29 +4,32 @@ require 'chutney'
 require 'chutney/formatter'
 require 'chutney/formatter/rainbow_formatter'
 
-task default: ['test:unit']
+task default: ['test:everything']
 
 namespace :test do
-
-desc 'chutney'
-task :chutney do
+  desc 'chutney'
+  task :chutney do
     files = Dir.glob('features/**/*.feature')
     linter = Chutney::ChutneyLint.new(*files)
     report = linter.analyse
     formatter = Chutney::RainbowFormatter.new
     formatter.results = report
     formatter.format
-
     exit(false) unless formatter.files_with_issues.empty?
-end
-
-desc 'run linters'
-task lint: :chutney do
+  end
+  desc 'run linters'
+  task lint: :chutney do
     sh 'rubocop || true'
-end
-
-desc 'run tests'
-task :local do
-    puts 'hellowoerd'
-end 
+  end
+  desc 'run unit tests'
+  task :unit do
+    system 'cd .. && rspec -f documentation'
+  end
+  desc 'run functional tests'
+  task :functional do
+    system('bundle exec cucumber')
+  end
+  desc 'run all linters and tests'
+  task everything: %w[lint unit functional] do
+  end
 end
