@@ -1,0 +1,5 @@
+The program will execute via cli
+Registrations will be given as arguments
+Output will be text (return errors for bad inputs)
+The information regarding format does not neccesarily apply to the functions requested
+I can add extra funtionality

@@ -2,15 +2,20 @@
 
 require 'pry'
 
-def validate(input)
-  response = `cd .. && ruby run.rb -validate #{input}2>&1`; result=$?.success?
+def validate(arg, input)
+  response = `cd .. && ruby run.rb -#{arg} #{input} 2>&1`; result=$?.success?
   [$?, response.strip]
 end
 
 When(/I run the validator with an input of (.*)$/) do |input|
-  pp validate(input)
+  # logger.debug("using #{input}")
+  @result = validate(input)
 end
 
-Then(/^the response is (.*) (.*) (.*)$/) do |cukes, cukes2, cukes3|
-  # fail 'HelloAgain'
+When(/I run the validator with argument: (.*) and input: (.*)$/) do |arg, input|
+  @result = validate(arg, input)
+end
+
+Then(/^the response is (.*)$/) do |expected_response|
+  expect(@result.last).to eq expected_response 
 end
