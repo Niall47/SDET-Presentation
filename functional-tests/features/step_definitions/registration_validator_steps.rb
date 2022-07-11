@@ -2,7 +2,7 @@ require 'pry'
 
 def validate(input)
   response = `cd .. && ruby run.rb -info \' + input`
-    p response
+  p response
   # system('cd .. && ruby run.rb -info ' + input)
 end
 
