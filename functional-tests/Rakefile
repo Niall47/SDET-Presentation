@@ -23,6 +23,7 @@ namespace :test do
   task lint: :chutney do
     sh 'rubocop || true'
   end
+
   desc 'run tests'
   task :local do
     puts 'hellowoerd'
