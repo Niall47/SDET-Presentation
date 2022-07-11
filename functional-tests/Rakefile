@@ -7,8 +7,9 @@ require 'chutney/formatter/rainbow_formatter'
 task default: ['test:unit']
 
 namespace :test do
-  desc 'chutney'
-  task :chutney do
+
+desc 'chutney'
+task :chutney do
     files = Dir.glob('features/**/*.feature')
     linter = Chutney::ChutneyLint.new(*files)
     report = linter.analyse
@@ -17,15 +18,15 @@ namespace :test do
     formatter.format
 
     exit(false) unless formatter.files_with_issues.empty?
-  end
+end
 
-  desc 'run linters'
-  task lint: :chutney do
+desc 'run linters'
+task lint: :chutney do
     sh 'rubocop || true'
-  end
+end
 
-  desc 'run tests'
-  task :local do
+desc 'run tests'
+task :local do
     puts 'hellowoerd'
-  end
+end 
 end
