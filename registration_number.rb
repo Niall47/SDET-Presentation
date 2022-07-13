@@ -33,7 +33,7 @@ class Registration_number
 
   def validate
     # check input against all known validation rules
-    region = @validation_data['region'][@region_code.chars.first] unless !region_code_valid?
+    region = @validation_data['region'][@region_code.chars.first] if region_code_valid?
     age = @validation_data['age'][@age_identifier]
     if age && region && !invalid_chars?
       "#{@value} was registered between #{age} in the #{region} area"
