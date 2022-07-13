@@ -5,12 +5,12 @@ require 'json'
 
 # Takes a string and splits it into component parts
 class RegistrationNumber
-  def initialize(input)
+  def initialize(input, validation_data)
     @region_code = input[0..1]
     @age_identifier = input[2..3]
     @random_section = input[4..6]
     @value = input
-    @validation_data = JSON.parse(File.read('validations.json'))
+    @validation_data = validation_data
   end
 
   def format_valid?
@@ -44,6 +44,8 @@ class RegistrationNumber
       raise "#{@value} was not valid"
     end
   end
+
+  private
 
   def region_code_valid?
     # Check our registration number matches a region
