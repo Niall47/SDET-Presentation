@@ -19,7 +19,7 @@ namespace :test do
   end
   desc 'run linters'
   task lint: :chutney do
-    sh 'rubocop || true'
+    sh 'cd .. && rubocop || true'
   end
   desc 'run unit tests'
   task :unit do
@@ -29,7 +29,9 @@ namespace :test do
   task :functional do
     system('bundle exec cucumber')
   end
+  # rubocop:disable Lint/EmptyBlock
   desc 'run all linters and tests'
   task everything: %w[lint unit functional] do
   end
+  # rubocop:enable Lint/EmptyBlock
 end

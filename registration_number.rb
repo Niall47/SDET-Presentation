@@ -3,7 +3,8 @@
 require 'pry'
 require 'json'
 
-class Registration_number
+# Takes a string and splits it into component parts
+class RegistrationNumber
   def initialize(input)
     @region_code = input[0..1]
     @age_identifier = input[2..3]
@@ -13,7 +14,8 @@ class Registration_number
   end
 
   def format_valid?
-    # determine if it is in the correct format for a vehicle registration value (two letters, two numbers, three more letters).
+    # determine if it is in the correct format for a vehicle registration value
+    # (two letters, two numbers, three more letters).
     if @value.match?(/[A-Z]{2}\d{2}[A-Z]{3}/)
       "#{@value} matches current style format"
     else
@@ -22,7 +24,8 @@ class Registration_number
   end
 
   def year_of_registration
-    # display the year of registration it represents if the age identifier is valid or an error if it is invalid
+    # return the year of registration if the age identifier is valid
+    # or return an error if it is invalid
     year = @validation_data['age'][@age_identifier]
     if year && format_valid?
       year

@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require_relative 'registration_number'
 
 def check_formatting(input)
-  registration_number = Registration_number.new(input)
+  registration_number = RegistrationNumber.new(input)
   puts registration_number.format_valid?
 end
 
 def check_age(input)
-  registration_number = Registration_number.new(input)
+  registration_number = RegistrationNumber.new(input)
   puts registration_number.year_of_registration
 end
 
 def validate(input)
-  registration_number = Registration_number.new(input)
+  registration_number = RegistrationNumber.new(input)
   puts registration_number.validate
 end
 
@@ -27,5 +29,5 @@ when '-validate'
 when nil
   raise 'You need to provide an argument'
 else
-  raise 'Unexpected command: ' + command
+  raise "Unexpected command: #{command}"
 end
