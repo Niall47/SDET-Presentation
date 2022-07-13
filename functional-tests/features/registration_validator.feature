@@ -18,3 +18,8 @@ Scenario: I check the format of a valid registration
 Scenario: I validate a valid registration 
     When I run the validator with argument: validate and input: PE59USY
     Then the response is PE59USY was registered between September 2009 to March 2010 in the Preston area
+
+Scenario: I submit an invalid argument
+    When I run the validator with argument: helloworld and input: PE59USY
+    Then the response is Unexpected command: -helloworld
+
