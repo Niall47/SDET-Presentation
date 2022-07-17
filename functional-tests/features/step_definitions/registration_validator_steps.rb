@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 def validate(arg, input)
   response = `cd .. && ruby run.rb -#{arg} #{input} 2>&1`
   [$CHILD_STATUS, response.strip]

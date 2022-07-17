@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
 require 'json'
 
 # Takes a string and splits it into component parts
@@ -30,7 +29,7 @@ class RegistrationNumber
     if year && format_valid?
       year
     else
-      raise "Unable to get age for #{value}"
+      raise "Unable to get age for #{@value}"
     end
   end
 

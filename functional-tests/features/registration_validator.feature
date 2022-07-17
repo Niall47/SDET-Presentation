@@ -1,8 +1,8 @@
 Feature: Registration Validator
 
-As an EO
-I want a promotion
-So I can buy a house
+As a user of the registration number system
+I want to validate registration numbers
+So I can use the system correctly
 
 @happy_path
 Scenario: I check the age of a valid registration number
@@ -22,4 +22,3 @@ Scenario: I validate a valid registration
 Scenario: I submit an invalid argument
     When I run the validator with argument: helloworld and input: PE59USY
     Then the response is Unexpected command: -helloworld
-
